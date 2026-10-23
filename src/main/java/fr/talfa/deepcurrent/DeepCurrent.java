@@ -3,6 +3,7 @@ package fr.talfa.deepcurrent;
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.Create;
 import fr.talfa.deepcurrent.config.DCConfigs;
+import fr.talfa.deepcurrent.platform.DCGameEvents;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 
@@ -38,6 +39,7 @@ public final class DeepCurrent {
 
     private static void init(IEventBus modBus) {
         LOGGER.info("{} loading on top of {}", NAME, Create.NAME);
+        DCGameEvents.register();
     }
 
     public static ResourceLocation asResource(String path) {

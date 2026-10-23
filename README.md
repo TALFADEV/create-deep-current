@@ -31,6 +31,7 @@ Requires JDK 17 and JDK 21 installed (Gradle toolchains pick the right one per v
 ```bash
 ./gradlew build                  # build every version + run core tests
 ./gradlew :core:test             # run the logic unit tests
+./gradlew :1.21.1-neoforge:runGameTestServer   # in-world game tests on a headless server
 ./gradlew :1.21.1-neoforge:runClient
 ./gradlew :1.20.1-forge:runClient
 ```
