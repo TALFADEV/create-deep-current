@@ -1,0 +1,33 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Stonecutter needs Gradle on Java 21; the 1.20.1 node compiles with the Java 17 toolchain.
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: |
+            17
+            21
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Test core logic
+        run: ./gradlew :core:test
+
+      - name: Build every Minecraft version
+        run: ./gradlew build
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: jars
+          path: versions/*/build/libs/*.jar

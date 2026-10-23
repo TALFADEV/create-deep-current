@@ -1,0 +1,9 @@
+{
+  "deepcurrent.mod_name": "Create: Deep Current",
+
+  "deepcurrent.configuration.grid": "Electrical grid",
+  "deepcurrent.configuration.stressPerKilowatt": "Stress per kilowatt",
+  "deepcurrent.configuration.alternatorEfficiency": "Alternator efficiency",
+  "deepcurrent.configuration.performance": "Performance",
+  "deepcurrent.configuration.particles": "Particles"
+}
