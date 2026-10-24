@@ -22,6 +22,9 @@ public final class DCServerConfig extends ConfigBase {
     public final ConfigInt stressPerKilowatt = i(256, 1, "stressPerKilowatt", Comments.stressPerKilowatt);
     public final ConfigFloat alternatorEfficiency =
             f(0.9f, 0.01f, 1f, "alternatorEfficiency", Comments.alternatorEfficiency);
+    public final ConfigInt manualRange = i(32, 1, 256, "manualRange", Comments.manualRange);
+    public final ConfigInt blocksPerCoil = i(8, 1, 1024, "blocksPerCoil", Comments.blocksPerCoil);
+    public final ConfigInt lossWarningPercent = i(15, 0, 100, "lossWarningPercent", Comments.lossWarningPercent);
     public final ConfigFloat lvVoltage = f(0.4f, 0.001f, 10000f, "lvVoltage", Comments.voltage);
     public final ConfigInt lvMaxCurrent = i(640, 1, "lvMaxCurrent", Comments.maxCurrent);
     public final ConfigFloat lvLossPerBlock = f(0.002f, 0f, 1f, "lvLossPerBlock", Comments.lossPerBlock);
@@ -106,6 +109,10 @@ public final class DCServerConfig extends ConfigBase {
         static final String stressPerKilowatt = "Stress units (SU) converted into one kilowatt of electricity.";
         static final String alternatorEfficiency =
                 "Fraction of the rotational power an alternator turns into electricity.";
+        static final String manualRange = "Longest cable a player can lay by hand, in blocks.";
+        static final String blocksPerCoil = "Blocks of cable in one cable coil.";
+        static final String lossWarningPercent = "Line losses (% of the injected power) above which laying a cable "
+                + "warns the player to raise the voltage.";
         static final String voltage = "Nominal voltage of this cable class, in kV (shown to players).";
         static final String maxCurrent = "Current this cable class carries before overloading, in A.";
         static final String lossPerBlock = "Line loss per block: a cable of length L delivers exp(-L x loss) "

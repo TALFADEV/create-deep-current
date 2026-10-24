@@ -1,6 +1,7 @@
 package fr.talfa.deepcurrent.platform;
 
 import fr.talfa.deepcurrent.command.DCCommands;
+import fr.talfa.deepcurrent.content.grid.CablePlacement;
 import fr.talfa.deepcurrent.world.Tides;
 
 //? if neoforge {
@@ -24,6 +25,9 @@ public final class DCGameEvents {
         //?} else
         /*var bus = MinecraftForge.EVENT_BUS;*/
         bus.addListener((RegisterCommandsEvent event) -> DCCommands.register(event.getDispatcher()));
-        bus.addListener((ServerStoppedEvent event) -> Tides.reset());
+        bus.addListener((ServerStoppedEvent event) -> {
+            Tides.reset();
+            CablePlacement.clearServer();
+        });
     }
 }

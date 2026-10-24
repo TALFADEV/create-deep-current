@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=up": {
+      "model": "deepcurrent:block/lv_connector"
+    },
+    "facing=down": {
+      "model": "deepcurrent:block/lv_connector",
+      "x": 180
+    },
+    "facing=north": {
+      "model": "deepcurrent:block/lv_connector",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "deepcurrent:block/lv_connector",
+      "x": 90,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "deepcurrent:block/lv_connector",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east": {
+      "model": "deepcurrent:block/lv_connector",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

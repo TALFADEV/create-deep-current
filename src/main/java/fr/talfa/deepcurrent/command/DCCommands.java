@@ -1,26 +1,34 @@
 package fr.talfa.deepcurrent.command;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import fr.talfa.deepcurrent.config.DCConfigs;
+import fr.talfa.deepcurrent.content.grid.LevelGrid;
+import fr.talfa.deepcurrent.content.grid.NetworkSummary;
 import fr.talfa.deepcurrent.core.Depth;
 import fr.talfa.deepcurrent.core.pressure.PressureTiers;
 import fr.talfa.deepcurrent.core.tide.TideState;
 import fr.talfa.deepcurrent.world.Tides;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 
 /** Operator debug commands (GDD §12, admin tools). */
 public final class DCCommands {
     private static final String PREFIX = "deepcurrent.command.";
+    private static final double GRID_INFO_REACH = 20;
 
     private DCCommands() {
     }
@@ -33,7 +41,39 @@ public final class DCCommands {
                         .then(Commands.literal("reset").executes(DCCommands::tideReset))
                         .then(Commands.argument("coefficient", DoubleArgumentType.doubleArg(0, 10))
                                 .executes(DCCommands::tideForce)))
-                .then(Commands.literal("pressure").executes(DCCommands::pressure)));
+                .then(Commands.literal("pressure").executes(DCCommands::pressure))
+                .then(Commands.literal("grid").then(Commands.literal("info")
+                        .executes(DCCommands::gridInfoTargeted)
+                        .then(Commands.argument("pos", BlockPosArgument.blockPos())
+                                .executes(context -> gridInfo(context.getSource(),
+                                        BlockPosArgument.getLoadedBlockPos(context, "pos")))))));
+    }
+
+    private static int gridInfoTargeted(CommandContext<CommandSourceStack> context) {
+        CommandSourceStack source = context.getSource();
+        Entity entity = source.getEntity();
+        HitResult hit = entity == null ? null : entity.pick(GRID_INFO_REACH, 1, false);
+        if (!(hit instanceof BlockHitResult blockHit) || hit.getType() != HitResult.Type.BLOCK) {
+            source.sendFailure(Component.translatable(PREFIX + "grid.no_target"));
+            return 0;
+        }
+        return gridInfo(source, blockHit.getBlockPos());
+    }
+
+    private static int gridInfo(CommandSourceStack source, BlockPos pos) {
+        LevelGrid grid = LevelGrid.get(source.getLevel());
+        if (!grid.hasNode(pos)) {
+            source.sendFailure(Component.translatable(PREFIX + "grid.not_a_node",
+                    pos.getX(), pos.getY(), pos.getZ()));
+            return 0;
+        }
+        send(source, Component.translatable(PREFIX + "grid.header", pos.getX(), pos.getY(), pos.getZ(),
+                Component.translatable("deepcurrent.grid.role." + grid.role(pos).name().toLowerCase(Locale.ROOT)),
+                grid.network(pos).id()));
+        List<Component> lines = new ArrayList<>();
+        NetworkSummary.of(grid, pos).describe(lines, false);
+        lines.forEach(line -> send(source, line));
+        return 1;
     }
 
     private static int tideInfo(CommandContext<CommandSourceStack> context) {

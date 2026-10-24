@@ -1,4 +1,7 @@
-"""Writes the 1x1x1 empty structure used as the template of the mod's game tests.
+"""Writes the empty structures used as templates of the mod's game tests.
+
+- empty: 1x1x1, for tests that only need a level.
+- platform: 9x4x4 of air, for tests that place machines and connectors.
 
 Usage:
     python tools/gametest/make_empty_structure.py
@@ -46,10 +49,10 @@ def compound_list(key: str, compounds: list[bytes]) -> bytes:
     return bytes([TAG_LIST]) + name(key) + body
 
 
-def empty_structure() -> bytes:
+def empty_structure(size: list[int]) -> bytes:
     root = (
         int_tag("DataVersion", DATA_VERSION)
-        + int_list("size", [1, 1, 1])
+        + int_list("size", size)
         + compound_list("palette", [string_tag("Name", "minecraft:air")])
         + compound_list("blocks", [int_list("pos", [0, 0, 0]) + int_tag("state", 0)])
         + compound_list("entities", [])
@@ -57,13 +60,17 @@ def empty_structure() -> bytes:
     return bytes([TAG_COMPOUND]) + name("") + root + bytes([TAG_END])
 
 
+STRUCTURES = {"empty": [1, 1, 1], "platform": [9, 4, 4]}
+
+
 def main() -> None:
-    data = gzip.compress(empty_structure(), mtime=0)
-    for folder in ("structures", "structure"):
-        path = DATA / folder / "empty.nbt"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_bytes(data)
-        print(f"wrote {path.relative_to(ROOT)}")
+    for name, size in STRUCTURES.items():
+        data = gzip.compress(empty_structure(size), mtime=0)
+        for folder in ("structures", "structure"):
+            path = DATA / folder / f"{name}.nbt"
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(data)
+            print(f"wrote {path.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

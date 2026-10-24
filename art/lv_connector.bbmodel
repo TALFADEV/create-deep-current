@@ -1,0 +1,449 @@
+{
+  "meta": {
+    "format_version": "4.10",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "lv_connector",
+  "model_identifier": "",
+  "visible_box": [
+    1,
+    1,
+    0
+  ],
+  "resolution": {
+    "width": 16,
+    "height": 16
+  },
+  "elements": [
+    {
+      "name": "foot",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        4,
+        0,
+        4
+      ],
+      "to": [
+        12,
+        2,
+        12
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            8,
+            8,
+            10
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            8,
+            8,
+            10
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            0,
+            8,
+            8,
+            10
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            0,
+            8,
+            8,
+            10
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            8,
+            8
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "006bd44a-6022-5dba-9335-2675964c20a7"
+    },
+    {
+      "name": "insulator",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        6.5,
+        2,
+        6.5
+      ],
+      "to": [
+        9.5,
+        10,
+        9.5
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            8,
+            8,
+            11,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            8,
+            8,
+            11,
+            16
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            8,
+            8,
+            11,
+            16
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            8,
+            8,
+            11,
+            16
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            11,
+            13,
+            14,
+            16
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            11,
+            13,
+            14,
+            16
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "5e6c6934-ac0f-5e6d-b56b-d7811bc2057a"
+    },
+    {
+      "name": "shed_low",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        5,
+        3,
+        5
+      ],
+      "to": [
+        11,
+        4,
+        11
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            8,
+            6,
+            14,
+            7
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            8,
+            6,
+            14,
+            7
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            8,
+            6,
+            14,
+            7
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            8,
+            6,
+            14,
+            7
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            8,
+            0,
+            14,
+            6
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            8,
+            0,
+            14,
+            6
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "17cfd260-ee2a-53fa-b05f-40b6698e634d"
+    },
+    {
+      "name": "shed_high",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        5,
+        6,
+        5
+      ],
+      "to": [
+        11,
+        7,
+        11
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            8,
+            6,
+            14,
+            7
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            8,
+            6,
+            14,
+            7
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            8,
+            6,
+            14,
+            7
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            8,
+            6,
+            14,
+            7
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            8,
+            0,
+            14,
+            6
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            8,
+            0,
+            14,
+            6
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "7792baf1-b975-5b1a-9062-bdeb43f00750"
+    },
+    {
+      "name": "lug",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        6.5,
+        10,
+        6.5
+      ],
+      "to": [
+        9.5,
+        12,
+        9.5
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            11,
+            11,
+            14,
+            13
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            11,
+            11,
+            14,
+            13
+          ],
+          "texture": 0
+        },
+        "east": {
+          "uv": [
+            11,
+            11,
+            14,
+            13
+          ],
+          "texture": 0
+        },
+        "west": {
+          "uv": [
+            11,
+            11,
+            14,
+            13
+          ],
+          "texture": 0
+        },
+        "up": {
+          "uv": [
+            11,
+            8,
+            14,
+            11
+          ],
+          "texture": 0
+        },
+        "down": {
+          "uv": [
+            11,
+            8,
+            14,
+            11
+          ],
+          "texture": 0
+        }
+      },
+      "type": "cube",
+      "uuid": "fcea41b6-2bee-559f-ac4a-38380e813c8c"
+    }
+  ],
+  "outliner": [
+    "006bd44a-6022-5dba-9335-2675964c20a7",
+    "5e6c6934-ac0f-5e6d-b56b-d7811bc2057a",
+    "17cfd260-ee2a-53fa-b05f-40b6698e634d",
+    "7792baf1-b975-5b1a-9062-bdeb43f00750",
+    "fcea41b6-2bee-559f-ac4a-38380e813c8c"
+  ],
+  "textures": [
+    {
+      "path": "",
+      "name": "lv_connector.png",
+      "folder": "block",
+      "namespace": "deepcurrent",
+      "id": "0",
+      "particle": true,
+      "render_mode": "default",
+      "visible": true,
+      "mode": "bitmap",
+      "saved": true,
+      "uuid": "f5bce0f0-44b3-5543-bd57-c030565e2f89",
+      "relative_path": "../src/main/resources/assets/deepcurrent/textures/block/lv_connector.png",
+      "source": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABOklEQVR4nGOcuXjOfwY8YM/qZVjFV2/axwiiWUDE1tVbGITFBOCSQiIiDLev3WFg52IF8+8/eg6X+/37L8Pff//gfBYQAdIM0gQDgoJCDKpaKgyPHjzEsJmVlZnh70+EAUwwG9+9eQPWCAJ3b99C0QSylZuDGc5GBkwwhrKqGooX0G39+gNiCIiNYYAg1GYYQHbN9duPGH78/A3Gbz/+ANPIgAVEnDp6CuxnZINAYqBAFObnYMAHGEMjQvFG4+oVq8HRhQuw6Bsa4rXh/o0r/0F+Bzl/dbA1XFyzZSEkHZw4dhyvAX1ZogzSctIMe3ecB/P3XrjKwM3BjnDBlo2b8TrxxUPN/9wc7xjefvzDwKp9B0Uz2AAGEoCmgjSGGAspBpy5cY8yAw4y8VFmAAiAMhZyYiLJAFCqRAcAQ2VuGe/eW84AAAAASUVORK5CYII="
+    }
+  ]
+}

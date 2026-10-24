@@ -4,8 +4,8 @@ Usage:
     python tools/textures/generate.py
 
 Textures are written into the mod's assets; review sheets go to
-tools/textures/preview/ (not shipped in the jar). Generators are added with the
-milestones that need them and registered in GENERATORS.
+tools/textures/preview/ (not shipped in the jar). Each module lists its
+generators in GENERATORS.
 """
 
 from __future__ import annotations
@@ -14,10 +14,9 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw
 
+import grid_textures
 import palette
 
-ROOT = Path(__file__).resolve().parents[2]
-ASSETS = ROOT / "src" / "main" / "resources" / "assets" / "deepcurrent" / "textures"
 PREVIEW = Path(__file__).resolve().parent / "preview"
 
 
@@ -39,7 +38,7 @@ def palette_sheet() -> None:
     sheet.save(PREVIEW / "palette.png")
 
 
-GENERATORS = [palette_sheet]
+GENERATORS = [palette_sheet, *grid_textures.GENERATORS]
 
 
 def main() -> None:

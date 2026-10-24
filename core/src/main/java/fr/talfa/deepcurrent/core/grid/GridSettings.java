@@ -28,4 +28,14 @@ public final class GridSettings {
     public CableSpec spec(VoltageClass voltage) {
         return specs.get(voltage);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other instanceof GridSettings settings && specs.equals(settings.specs);
+    }
+
+    @Override
+    public int hashCode() {
+        return specs.hashCode();
+    }
 }

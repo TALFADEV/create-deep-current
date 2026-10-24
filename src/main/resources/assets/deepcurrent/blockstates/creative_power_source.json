@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "deepcurrent:block/creative_power_source"
+    }
+  }
+}
