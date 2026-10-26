@@ -19,6 +19,8 @@ import net.minecraft.world.level.biome.Biome;
 public final class Tides {
     /** Coefficient forced by an operator, or NaN when following the moon. */
     private static double forcedCoefficient = Double.NaN;
+    /** Current speed forced everywhere (game tests: test worlds have no ocean), or NaN. */
+    private static double forcedCurrentSpeed = Double.NaN;
     private static CurrentField currentField;
 
     private Tides() {
@@ -62,8 +64,16 @@ public final class Tides {
         return CurrentKind.NONE;
     }
 
+    /** Forces the current speed everywhere, in m/s; NaN follows the world again. */
+    public static void forceCurrent(double speed) {
+        forcedCurrentSpeed = speed;
+    }
+
     /** Current speed at a position in m/s: seeded per area at sea, constant in rivers, zero elsewhere. */
     public static double currentSpeed(ServerLevel level, BlockPos pos) {
+        if (!Double.isNaN(forcedCurrentSpeed)) {
+            return forcedCurrentSpeed;
+        }
         CurrentField field = currentField(level);
         return switch (currentKind(level, pos)) {
             case OCEAN -> field.speedAt(pos.getX(), pos.getZ());
@@ -80,6 +90,7 @@ public final class Tides {
     /** Forgets the override and cached field when the server stops, so the next world starts clean. */
     public static void reset() {
         forcedCoefficient = Double.NaN;
+        forcedCurrentSpeed = Double.NaN;
         currentField = null;
     }
 

@@ -115,6 +115,13 @@
   "deepcurrent.small_battery.empty": "Vide",
   "deepcurrent.small_battery.idle": "Au repos",
   "deepcurrent.small_battery.item": "Stockée : %s / %s kWh",
+  "block.deepcurrent.small_tidal_turbine": "Petite hydrolienne",
+  "deepcurrent.small_tidal_turbine.title": "Petite hydrolienne",
+  "deepcurrent.small_tidal_turbine.dry": "Pas immergée : il faut %s faces dans l'eau (%s ici) et %s blocs d'eau au-dessus (%s ici), sous le niveau de la mer",
+  "deepcurrent.small_tidal_turbine.current": "Courant : %s m/s",
+  "deepcurrent.small_tidal_turbine.no_current": "Pas de courant ici : il faut un océan, une côte ou une rivière",
+  "deepcurrent.small_tidal_turbine.tide": "Coefficient de marée : %s",
+  "deepcurrent.small_tidal_turbine.speed": "Tourne à %s tr/min",
   "deepcurrent.configuration.alternatorStressImpact": "Contrainte de l'alternateur par tr/min",
   "deepcurrent.configuration.motorStressCapacity": "Capacité du moteur électrique par tr/min"
 }

@@ -10,11 +10,13 @@ import fr.talfa.deepcurrent.client.AlternatorRenderer;
 import fr.talfa.deepcurrent.client.ConnectorRenderer;
 import fr.talfa.deepcurrent.client.DCPartialModels;
 import fr.talfa.deepcurrent.client.HalfShaftRenderer;
+import fr.talfa.deepcurrent.client.TidalTurbineRenderer;
 import fr.talfa.deepcurrent.content.grid.ConnectorBlockEntity;
 import fr.talfa.deepcurrent.content.grid.CreativePowerBlockEntity;
 import fr.talfa.deepcurrent.content.machines.AlternatorBlockEntity;
 import fr.talfa.deepcurrent.content.machines.ElectricMotorBlockEntity;
 import fr.talfa.deepcurrent.content.storage.SmallBatteryBlockEntity;
+import fr.talfa.deepcurrent.content.turbine.SmallTidalTurbineBlockEntity;
 
 public final class DCBlockEntities {
     public static final BlockEntityEntry<ConnectorBlockEntity> CONNECTOR = REGISTRATE
@@ -52,6 +54,14 @@ public final class DCBlockEntities {
     public static final BlockEntityEntry<SmallBatteryBlockEntity> SMALL_BATTERY = REGISTRATE
             .blockEntity("small_battery", SmallBatteryBlockEntity::new)
             .validBlocks(DCBlocks.SMALL_BATTERY)
+            .register();
+
+    // Rotor and output shaft spin together, modelled facing north with the shaft at the back.
+    public static final BlockEntityEntry<SmallTidalTurbineBlockEntity> SMALL_TIDAL_TURBINE = REGISTRATE
+            .blockEntity("small_tidal_turbine", SmallTidalTurbineBlockEntity::new)
+            .visual(() -> OrientedRotatingVisual.backHorizontal(DCPartialModels.TIDAL_TURBINE_ROTOR), false)
+            .validBlocks(DCBlocks.SMALL_TIDAL_TURBINE)
+            .renderer(() -> TidalTurbineRenderer::new)
             .register();
 
     private DCBlockEntities() {

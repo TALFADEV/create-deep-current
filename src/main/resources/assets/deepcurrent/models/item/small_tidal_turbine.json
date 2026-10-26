@@ -1239,7 +1239,7 @@
       "from": [
         6,
         6,
-        12
+        8
       ],
       "to": [
         10,
@@ -1252,40 +1252,36 @@
             6,
             0,
             10,
-            4
+            8
           ],
-          "texture": "#axis",
-          "rotation": 90
+          "texture": "#axis"
         },
         "down": {
           "uv": [
             6,
             0,
             10,
-            4
+            8
           ],
-          "texture": "#axis",
-          "rotation": 90
+          "texture": "#axis"
         },
         "east": {
           "uv": [
             6,
             0,
             10,
-            4
+            8
           ],
-          "texture": "#axis",
-          "rotation": 90
+          "texture": "#axis"
         },
         "west": {
           "uv": [
             6,
             0,
             10,
-            4
+            8
           ],
-          "texture": "#axis",
-          "rotation": 90
+          "texture": "#axis"
         },
         "south": {
           "uv": [

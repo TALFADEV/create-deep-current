@@ -180,21 +180,23 @@ def write_small_battery() -> None:
 
 
 def write_small_tidal_turbine() -> None:
-    """Static nacelle facing north (the rotor points into the current) and the rotor that spins around Z.
-    The block itself comes with milestone 5."""
+    """Static nacelle facing north (the rotor points into the current) and the rotor with its output half shaft,
+    which spin together around Z."""
     textures = {"atlas": f"{NS}:block/small_tidal_turbine", "axis": "create:block/axis",
                 "axis_top": "create:block/axis_top", "particle": f"{NS}:block/small_tidal_turbine"}
     model = lambda elements: {"parent": "block/block", "textures": textures, "elements": elements}  # noqa: E731
     turbine = turbine_art.TURBINE_ELEMENTS
     write_json(ASSETS / "models" / "block" / "small_tidal_turbine.json", model(turbine))
-    write_json(ASSETS / "models" / "block" / "small_tidal_turbine" / "rotor.json", model(turbine_art.ROTOR_ELEMENTS))
+    rotor = turbine_art.ROTOR_ELEMENTS + turbine_art.HALF_SHAFT
+    write_json(ASSETS / "models" / "block" / "small_tidal_turbine" / "rotor.json", model(rotor))
     variants = {f"facing={f}": {"model": f"{NS}:block/small_tidal_turbine", **({"y": y} if y else {})}
                 for f, y in (("north", 0), ("east", 90), ("south", 180), ("west", 270))}
     write_json(ASSETS / "blockstates" / "small_tidal_turbine.json", {"variants": variants})
     # In inventories nothing spins: the item shows the nacelle, the rotor and the output shaft together.
     write_json(ASSETS / "models" / "item" / "small_tidal_turbine.json",
-               model(turbine + turbine_art.ROTOR_ELEMENTS + turbine_art.ITEM_SHAFT))
-    # No loot table yet: it would name an item that does not exist until the block is registered (milestone 5).
+               model(turbine + rotor))
+    for folder in ("loot_tables", "loot_table"):
+        write_json(DATA / folder / "blocks" / "small_tidal_turbine.json", loot_table("small_tidal_turbine"))
     write_json(ART / "small_tidal_turbine.bbmodel", blockbench_model({
         "name": "small_tidal_turbine", "textures": textures, "elements": turbine + turbine_art.ROTOR_ELEMENTS}))
 

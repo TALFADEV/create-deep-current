@@ -9,7 +9,7 @@ A one-block turbine lying along Z, designed facing north (the rotor points into 
   light steel with red tips. Each blade is tilted 22.5 degrees around its own length, the top and bottom (and the
   left and right) ones the opposite way, so the four form one propeller.
 
-The block itself comes with milestone 5: the blockstate expects a horizontal "facing" property.
+The blockstate turns it toward its horizontal "facing"; the rotor and the half shaft spin as one partial model.
 """
 
 from __future__ import annotations
@@ -278,9 +278,10 @@ ROTOR_ELEMENTS = [
     _blade("blade_west", [0.5, 6.5, 2], [6, 9.5, 3], _horizontal_faces(False), "x", -22.5),
 ]
 
-# For the item only (nothing spins in inventories): Create's half shaft coming out of the collar.
-ITEM_SHAFT = [{"name": "shaft", "from": [6, 6, 12], "to": [10, 10, 16], "faces": {
-    **{f: {"uv": [6, 0, 10, 4], "texture": "#axis", "rotation": 90} for f in ("up", "down", "east", "west")},
+# Create's half shaft from the centre to the back face; it spins with the rotor (same partial model), drawn like
+# the alternator's through shaft.
+HALF_SHAFT = [{"name": "shaft", "from": [6, 6, 8], "to": [10, 10, 16], "faces": {
+    **{f: {"uv": [6, 0, 10, 8], "texture": "#axis"} for f in ("up", "down", "east", "west")},
     "south": {"uv": [6, 6, 10, 10], "texture": "#axis_top"}}}]
 
 

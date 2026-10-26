@@ -8,6 +8,10 @@ public final class DCPartialModels {
     /** The alternator's rotor: copper drum and through shaft, modelled along Z. */
     public static final PartialModel ALTERNATOR_ROTOR = PartialModel.of(DeepCurrent.asResource("block/alternator/rotor"));
 
+    /** The small tidal turbine's hub, blades and output half shaft, modelled facing north. */
+    public static final PartialModel TIDAL_TURBINE_ROTOR =
+            PartialModel.of(DeepCurrent.asResource("block/small_tidal_turbine/rotor"));
+
     private DCPartialModels() {
     }
 

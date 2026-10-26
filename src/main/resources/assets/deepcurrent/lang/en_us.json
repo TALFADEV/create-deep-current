@@ -115,6 +115,13 @@
   "deepcurrent.small_battery.empty": "Empty",
   "deepcurrent.small_battery.idle": "Idle",
   "deepcurrent.small_battery.item": "Stored: %s / %s kWh",
+  "block.deepcurrent.small_tidal_turbine": "Small Tidal Turbine",
+  "deepcurrent.small_tidal_turbine.title": "Small tidal turbine",
+  "deepcurrent.small_tidal_turbine.dry": "Not immersed: needs %s faces in water (has %s) and %s water blocks above (has %s), below sea level",
+  "deepcurrent.small_tidal_turbine.current": "Current: %s m/s",
+  "deepcurrent.small_tidal_turbine.no_current": "No current here: turbines need an ocean, a coast or a river",
+  "deepcurrent.small_tidal_turbine.tide": "Tide coefficient: %s",
+  "deepcurrent.small_tidal_turbine.speed": "Turning at %s RPM",
   "deepcurrent.configuration.alternatorStressImpact": "Alternator stress per RPM",
   "deepcurrent.configuration.motorStressCapacity": "Electric motor capacity per RPM"
 }

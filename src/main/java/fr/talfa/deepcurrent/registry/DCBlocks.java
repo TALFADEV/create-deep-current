@@ -12,7 +12,10 @@ import fr.talfa.deepcurrent.content.machines.ElectricMotorBlock;
 import fr.talfa.deepcurrent.content.machines.ElectricMotorBlockEntity;
 import fr.talfa.deepcurrent.content.storage.SmallBatteryBlock;
 import fr.talfa.deepcurrent.content.storage.SmallBatteryItem;
+import fr.talfa.deepcurrent.content.turbine.SmallTidalTurbineBlock;
+import fr.talfa.deepcurrent.content.turbine.SmallTidalTurbineBlockEntity;
 import fr.talfa.deepcurrent.core.grid.VoltageClass;
+import fr.talfa.deepcurrent.core.turbine.TurbineSpec;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
 
@@ -57,6 +60,15 @@ public final class DCBlocks {
             .block("small_battery", SmallBatteryBlock::new)
             .properties(p -> p.mapColor(MapColor.COLOR_GRAY).strength(2f).sound(SoundType.NETHERITE_BLOCK).noOcclusion())
             .item(SmallBatteryItem::new).build()
+            .register();
+
+    public static final BlockEntry<SmallTidalTurbineBlock> SMALL_TIDAL_TURBINE = REGISTRATE
+            .block("small_tidal_turbine", SmallTidalTurbineBlock::new)
+            .properties(p -> p.mapColor(MapColor.COLOR_YELLOW).strength(2f).sound(SoundType.NETHERITE_BLOCK).noOcclusion())
+            .onRegister(block -> BlockStressValues.CAPACITIES.register(block,
+                    () -> SmallTidalTurbineBlockEntity.spec().capacityPerRpm()))
+            .onRegister(BlockStressValues.setGeneratorSpeed((int) TurbineSpec.SMALL.referenceRpm(), true))
+            .item().build()
             .register();
 
     private DCBlocks() {

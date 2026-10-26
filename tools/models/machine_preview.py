@@ -126,7 +126,7 @@ def main() -> None:
     turbine = turbine_art.TURBINE_ELEMENTS + turbine_art.ROTOR_ELEMENTS
     sheet("Petite hydrolienne — Alpha", atlas, [
         ("Face au courant (rotor)", turned(turbine)),
-        ("Arrière : sortie d'axe", turbine + turbine_art.ITEM_SHAFT),
+        ("Arrière : sortie d'axe", turbine + turbine_art.HALF_SHAFT),
         ("Nacelle sans le rotor", turned(turbine_art.TURBINE_ELEMENTS)),
     ], {"atlas": atlas, **shaft_textures}, "small_tidal_turbine")
 

@@ -12,6 +12,7 @@ import fr.talfa.deepcurrent.core.grid.VoltageClass;
 import fr.talfa.deepcurrent.core.pressure.IntegritySettings;
 import fr.talfa.deepcurrent.core.pressure.PressureTiers;
 import fr.talfa.deepcurrent.core.tide.TideSettings;
+import fr.talfa.deepcurrent.core.turbine.TurbineSpec;
 import net.createmod.catnip.config.ConfigBase;
 
 /**
@@ -48,6 +49,14 @@ public final class DCServerConfig extends ConfigBase {
     public final ConfigFloat smallBatteryMaxDischarge =
             f(16f, 0f, 100000f, "smallBatteryMaxDischarge", Comments.batteryMaxDischarge);
     public final ConfigFloat chargeEfficiency = f(0.9f, 0.01f, 1f, "chargeEfficiency", Comments.chargeEfficiency);
+
+    public final ConfigGroup turbines = group(0, "turbines", Comments.turbines);
+    public final ConfigFloat smallTurbineReferenceRpm =
+            f(32f, 0f, 256f, "smallTurbineReferenceRpm", Comments.turbineReferenceRpm);
+    public final ConfigFloat smallTurbineCapacityPerRpm =
+            f(512f, 0f, 65536f, "smallTurbineCapacityPerRpm", Comments.turbineCapacityPerRpm);
+    public final ConfigInt turbineMinWetFaces = i(4, 0, 6, "minWetFaces", Comments.minWetFaces);
+    public final ConfigInt turbineMinWaterAbove = i(3, 0, 64, "minWaterAbove", Comments.minWaterAbove);
 
     public final ConfigGroup tides = group(0, "tides", Comments.tides);
     public final ConfigFloat tideAmplitude = f(1f, 0f, 10f, "amplitude", Comments.tideAmplitude);
@@ -129,6 +138,17 @@ public final class DCServerConfig extends ConfigBase {
                 orDefault(chargeEfficiency, d.chargeEfficiency()));
     }
 
+    /** Small turbine spec; falls back to the defaults before the config loads (item tooltips in the main menu). */
+    public TurbineSpec smallTurbineSpec() {
+        TurbineSpec d = TurbineSpec.SMALL;
+        try {
+            return new TurbineSpec(smallTurbineReferenceRpm.get(), d.maxRpm(), smallTurbineCapacityPerRpm.get(),
+                    turbineMinWetFaces.get(), turbineMinWaterAbove.get());
+        } catch (IllegalStateException | NullPointerException e) {
+            return d;
+        }
+    }
+
     /** Values that pass the config's ranges can still be inconsistent together (e.g. min above max). */
     private static <T> T orDefault(String section, T fallback, Supplier<T> factory) {
         try {
@@ -161,6 +181,14 @@ public final class DCServerConfig extends ConfigBase {
         static final String maxCurrent = "Current this cable class carries before overloading, in A.";
         static final String lossPerBlock = "Line loss per block: a cable of length L delivers exp(-L x loss) "
                 + "of the power put into it.";
+
+        static final String turbines = "Tidal turbines";
+        static final String turbineReferenceRpm = "Speed of a small tidal turbine at the reference current with a "
+                + "tide coefficient of 1, in RPM. Its speed follows the current and the tide.";
+        static final String turbineCapacityPerRpm = "Stress capacity of a small tidal turbine per RPM, in SU. "
+                + "The default gives 16384 SU at 32 RPM, like a level 1 steam engine.";
+        static final String minWetFaces = "Faces of a turbine that must touch water for it to run.";
+        static final String minWaterAbove = "Water blocks needed straight above a turbine for it to run.";
 
         static final String tides = "Tides (tied to the time of day and the moon phase)";
         static final String tideAmplitude = "Tide coefficient at mid-tide during spring tides.";
