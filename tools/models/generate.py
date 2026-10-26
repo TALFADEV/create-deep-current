@@ -168,7 +168,13 @@ def write_small_battery() -> None:
         variants[f"charge={level}"] = {"model": f"{NS}:block/small_battery/charge_{level}"}
     write_json(ASSETS / "blockstates" / "small_battery.json", {"variants": variants})
     write_json(ASSETS / "models" / "item" / "small_battery.json", {"parent": f"{NS}:block/small_battery/charge_2"})
-    # No loot table yet: it would name an item that does not exist until the block is registered (milestone 4).
+    # The dropped item keeps its charge (StoredKj, see BatteryCharge): copy_nbt into the stack tag on 1.20,
+    # copy_custom_data into the custom data component on 1.21.
+    ops = [{"source": "StoredKj", "target": "StoredKj", "op": "replace"}]
+    for folder, function in (("loot_tables", "minecraft:copy_nbt"), ("loot_table", "minecraft:copy_custom_data")):
+        table = loot_table("small_battery")
+        table["pools"][0]["entries"][0]["functions"] = [{"function": function, "source": "block_entity", "ops": ops}]
+        write_json(DATA / folder / "blocks" / "small_battery.json", table)
     write_json(ART / "small_battery.bbmodel", blockbench_model({
         "name": "small_battery", "textures": textures, "elements": BATTERY_ELEMENTS + lit_cells(4)}))
 

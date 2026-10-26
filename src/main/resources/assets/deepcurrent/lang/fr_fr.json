@@ -106,6 +106,15 @@
   "deepcurrent.electric_motor.input": "Reçoit %s kW (demande %s kW)",
   "deepcurrent.electric_motor.short": "Alimenté à %s %% : capacité réduite",
   "deepcurrent.electric_motor.speed": "Vitesse",
+  "block.deepcurrent.small_battery": "Petite batterie",
+  "deepcurrent.small_battery.title": "Petite batterie",
+  "deepcurrent.small_battery.stored": "Charge : %s / %s kWh (%s %%)",
+  "deepcurrent.small_battery.charging": "En charge : %s kW",
+  "deepcurrent.small_battery.discharging": "En décharge : %s kW",
+  "deepcurrent.small_battery.full": "Pleine",
+  "deepcurrent.small_battery.empty": "Vide",
+  "deepcurrent.small_battery.idle": "Au repos",
+  "deepcurrent.small_battery.item": "Stockée : %s / %s kWh",
   "deepcurrent.configuration.alternatorStressImpact": "Contrainte de l'alternateur par tr/min",
   "deepcurrent.configuration.motorStressCapacity": "Capacité du moteur électrique par tr/min"
 }

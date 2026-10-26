@@ -10,6 +10,8 @@ import fr.talfa.deepcurrent.content.machines.AlternatorBlock;
 import fr.talfa.deepcurrent.content.machines.AlternatorBlockEntity;
 import fr.talfa.deepcurrent.content.machines.ElectricMotorBlock;
 import fr.talfa.deepcurrent.content.machines.ElectricMotorBlockEntity;
+import fr.talfa.deepcurrent.content.storage.SmallBatteryBlock;
+import fr.talfa.deepcurrent.content.storage.SmallBatteryItem;
 import fr.talfa.deepcurrent.core.grid.VoltageClass;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.MapColor;
@@ -49,6 +51,12 @@ public final class DCBlocks {
                     ElectricMotorBlockEntity::maxCapacityPerRpm))
             .onRegister(BlockStressValues.setGeneratorSpeed(ElectricMotorBlockEntity.MAX_SPEED, true))
             .item().build()
+            .register();
+
+    public static final BlockEntry<SmallBatteryBlock> SMALL_BATTERY = REGISTRATE
+            .block("small_battery", SmallBatteryBlock::new)
+            .properties(p -> p.mapColor(MapColor.COLOR_GRAY).strength(2f).sound(SoundType.NETHERITE_BLOCK).noOcclusion())
+            .item(SmallBatteryItem::new).build()
             .register();
 
     private DCBlocks() {

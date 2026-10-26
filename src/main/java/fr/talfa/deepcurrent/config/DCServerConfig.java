@@ -7,6 +7,7 @@ import fr.talfa.deepcurrent.DeepCurrent;
 import fr.talfa.deepcurrent.core.current.CurrentSettings;
 import fr.talfa.deepcurrent.core.grid.CableSpec;
 import fr.talfa.deepcurrent.core.grid.GridSettings;
+import fr.talfa.deepcurrent.core.grid.StorageSpec;
 import fr.talfa.deepcurrent.core.grid.VoltageClass;
 import fr.talfa.deepcurrent.core.pressure.IntegritySettings;
 import fr.talfa.deepcurrent.core.pressure.PressureTiers;
@@ -38,6 +39,15 @@ public final class DCServerConfig extends ConfigBase {
     public final ConfigFloat ehvVoltage = f(400f, 0.001f, 10000f, "ehvVoltage", Comments.voltage);
     public final ConfigInt ehvMaxCurrent = i(40, 1, "ehvMaxCurrent", Comments.maxCurrent);
     public final ConfigFloat ehvLossPerBlock = f(0.00008f, 0f, 1f, "ehvLossPerBlock", Comments.lossPerBlock);
+
+    public final ConfigGroup storage = group(0, "storage", Comments.storage);
+    public final ConfigFloat smallBatteryCapacity =
+            f(2f, 0.01f, 100000f, "smallBatteryCapacity", Comments.batteryCapacity);
+    public final ConfigFloat smallBatteryMaxCharge =
+            f(16f, 0f, 100000f, "smallBatteryMaxCharge", Comments.batteryMaxCharge);
+    public final ConfigFloat smallBatteryMaxDischarge =
+            f(16f, 0f, 100000f, "smallBatteryMaxDischarge", Comments.batteryMaxDischarge);
+    public final ConfigFloat chargeEfficiency = f(0.9f, 0.01f, 1f, "chargeEfficiency", Comments.chargeEfficiency);
 
     public final ConfigGroup tides = group(0, "tides", Comments.tides);
     public final ConfigFloat tideAmplitude = f(1f, 0f, 10f, "amplitude", Comments.tideAmplitude);
@@ -110,6 +120,15 @@ public final class DCServerConfig extends ConfigBase {
                 VoltageClass.EHV, new CableSpec(ehvVoltage.get(), ehvMaxCurrent.get(), ehvLossPerBlock.get()))));
     }
 
+    /** Small battery spec; falls back to the defaults before the config loads (item tooltips in the main menu). */
+    public StorageSpec smallBatterySpec() {
+        StorageSpec d = StorageSpec.SMALL_BATTERY;
+        return new StorageSpec(orDefault(smallBatteryCapacity, d.capacityKwh()),
+                orDefault(smallBatteryMaxCharge, d.maxChargeKw()),
+                orDefault(smallBatteryMaxDischarge, d.maxDischargeKw()),
+                orDefault(chargeEfficiency, d.chargeEfficiency()));
+    }
+
     /** Values that pass the config's ranges can still be inconsistent together (e.g. min above max). */
     private static <T> T orDefault(String section, T fallback, Supplier<T> factory) {
         try {
@@ -133,6 +152,11 @@ public final class DCServerConfig extends ConfigBase {
         static final String blocksPerCoil = "Blocks of cable in one cable coil.";
         static final String lossWarningPercent = "Line losses (% of the injected power) above which laying a cable "
                 + "warns the player to raise the voltage.";
+        static final String storage = "Batteries";
+        static final String batteryCapacity = "Energy a small battery holds when full, in kWh.";
+        static final String batteryMaxCharge = "Power a small battery can absorb, in kW.";
+        static final String batteryMaxDischarge = "Power a small battery can supply, in kW.";
+        static final String chargeEfficiency = "Fraction of the power a battery absorbs that it actually stores.";
         static final String voltage = "Nominal voltage of this cable class, in kV (shown to players).";
         static final String maxCurrent = "Current this cable class carries before overloading, in A.";
         static final String lossPerBlock = "Line loss per block: a cable of length L delivers exp(-L x loss) "

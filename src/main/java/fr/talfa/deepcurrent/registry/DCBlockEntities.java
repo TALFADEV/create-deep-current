@@ -14,6 +14,7 @@ import fr.talfa.deepcurrent.content.grid.ConnectorBlockEntity;
 import fr.talfa.deepcurrent.content.grid.CreativePowerBlockEntity;
 import fr.talfa.deepcurrent.content.machines.AlternatorBlockEntity;
 import fr.talfa.deepcurrent.content.machines.ElectricMotorBlockEntity;
+import fr.talfa.deepcurrent.content.storage.SmallBatteryBlockEntity;
 
 public final class DCBlockEntities {
     public static final BlockEntityEntry<ConnectorBlockEntity> CONNECTOR = REGISTRATE
@@ -46,6 +47,11 @@ public final class DCBlockEntities {
             .visual(() -> OrientedRotatingVisual.of(AllPartialModels.SHAFT_HALF), false)
             .validBlocks(DCBlocks.ELECTRIC_MOTOR)
             .renderer(() -> HalfShaftRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<SmallBatteryBlockEntity> SMALL_BATTERY = REGISTRATE
+            .blockEntity("small_battery", SmallBatteryBlockEntity::new)
+            .validBlocks(DCBlocks.SMALL_BATTERY)
             .register();
 
     private DCBlockEntities() {
