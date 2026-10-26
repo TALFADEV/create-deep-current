@@ -117,4 +117,5 @@ def cable_lv() -> None:
     save(img, "entity/cable_lv.png")
 
 
-GENERATORS = [lv_connector, creative_belts, lv_cable_coil, cable_lv]
+# Superseded: the connector, coil and cable are drawn in network_art.py, the creative blocks in creative_art.py.
+GENERATORS: list = []

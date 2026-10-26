@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "charge=0": {
+      "model": "deepcurrent:block/small_battery/charge_0"
+    },
+    "charge=1": {
+      "model": "deepcurrent:block/small_battery/charge_1"
+    },
+    "charge=2": {
+      "model": "deepcurrent:block/small_battery/charge_2"
+    },
+    "charge=3": {
+      "model": "deepcurrent:block/small_battery/charge_3"
+    },
+    "charge=4": {
+      "model": "deepcurrent:block/small_battery/charge_4"
+    }
+  }
+}

@@ -22,6 +22,10 @@ public final class DCServerConfig extends ConfigBase {
     public final ConfigInt stressPerKilowatt = i(256, 1, "stressPerKilowatt", Comments.stressPerKilowatt);
     public final ConfigFloat alternatorEfficiency =
             f(0.9f, 0.01f, 1f, "alternatorEfficiency", Comments.alternatorEfficiency);
+    public final ConfigFloat alternatorStressImpact =
+            f(64f, 0f, 4096f, "alternatorStressImpact", Comments.alternatorStressImpact);
+    public final ConfigFloat motorStressCapacity =
+            f(64f, 0f, 4096f, "motorStressCapacity", Comments.motorStressCapacity);
     public final ConfigInt manualRange = i(32, 1, 256, "manualRange", Comments.manualRange);
     public final ConfigInt blocksPerCoil = i(8, 1, 1024, "blocksPerCoil", Comments.blocksPerCoil);
     public final ConfigInt lossWarningPercent = i(15, 0, 100, "lossWarningPercent", Comments.lossWarningPercent);
@@ -64,6 +68,18 @@ public final class DCServerConfig extends ConfigBase {
     }
 
     // --- Core settings -------------------------------------------------------------------
+
+    /**
+     * A config value read where the server config may not be loaded yet (item tooltips in the main menu):
+     * falls back to the default instead of throwing.
+     */
+    public static double orDefault(ConfigFloat value, double fallback) {
+        try {
+            return value.get();
+        } catch (IllegalStateException | NullPointerException e) {
+            return fallback;
+        }
+    }
 
     public TideSettings tideSettings() {
         return orDefault("tides", TideSettings.DEFAULT, () -> new TideSettings(
@@ -109,6 +125,10 @@ public final class DCServerConfig extends ConfigBase {
         static final String stressPerKilowatt = "Stress units (SU) converted into one kilowatt of electricity.";
         static final String alternatorEfficiency =
                 "Fraction of the rotational power an alternator turns into electricity.";
+        static final String alternatorStressImpact = "Stress an alternator puts on its shaft, per RPM (like "
+                + "Create's machines). At 256 RPM, the default absorbs 16384 SU.";
+        static final String motorStressCapacity = "Stress capacity of a fully supplied electric motor, per RPM. "
+                + "It draws as much electricity as the stress its kinetic network actually uses.";
         static final String manualRange = "Longest cable a player can lay by hand, in blocks.";
         static final String blocksPerCoil = "Blocks of cable in one cable coil.";
         static final String lossWarningPercent = "Line losses (% of the injected power) above which laying a cable "

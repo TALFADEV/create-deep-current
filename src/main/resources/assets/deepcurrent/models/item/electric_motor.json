@@ -1,0 +1,611 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "atlas": "deepcurrent:block/electric_motor",
+    "axis": "create:block/axis",
+    "axis_top": "create:block/axis_top",
+    "particle": "deepcurrent:block/electric_motor"
+  },
+  "elements": [
+    {
+      "name": "base",
+      "from": [
+        1,
+        0,
+        1
+      ],
+      "to": [
+        15,
+        2,
+        15
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            0.0,
+            0.0,
+            7.0,
+            7.0
+          ],
+          "texture": "#atlas"
+        },
+        "down": {
+          "uv": [
+            0.0,
+            0.0,
+            7.0,
+            7.0
+          ],
+          "texture": "#atlas"
+        },
+        "north": {
+          "uv": [
+            0.0,
+            7.0,
+            7.0,
+            8.0
+          ],
+          "texture": "#atlas"
+        },
+        "south": {
+          "uv": [
+            0.0,
+            7.0,
+            7.0,
+            8.0
+          ],
+          "texture": "#atlas"
+        },
+        "east": {
+          "uv": [
+            0.0,
+            7.0,
+            7.0,
+            8.0
+          ],
+          "texture": "#atlas"
+        },
+        "west": {
+          "uv": [
+            0.0,
+            7.0,
+            7.0,
+            8.0
+          ],
+          "texture": "#atlas"
+        }
+      }
+    },
+    {
+      "name": "body",
+      "from": [
+        3,
+        2,
+        3
+      ],
+      "to": [
+        13,
+        13,
+        13
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            8.0,
+            5.0,
+            13.5
+          ],
+          "texture": "#atlas"
+        },
+        "south": {
+          "uv": [
+            0.0,
+            8.0,
+            5.0,
+            13.5
+          ],
+          "texture": "#atlas"
+        },
+        "east": {
+          "uv": [
+            0.0,
+            8.0,
+            5.0,
+            13.5
+          ],
+          "texture": "#atlas"
+        },
+        "west": {
+          "uv": [
+            0.0,
+            8.0,
+            5.0,
+            13.5
+          ],
+          "texture": "#atlas"
+        }
+      }
+    },
+    {
+      "name": "winding_band",
+      "from": [
+        2.5,
+        5,
+        2.5
+      ],
+      "to": [
+        13.5,
+        7,
+        13.5
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5.0,
+            8.0,
+            10.5,
+            9.0
+          ],
+          "texture": "#atlas"
+        },
+        "south": {
+          "uv": [
+            5.0,
+            8.0,
+            10.5,
+            9.0
+          ],
+          "texture": "#atlas"
+        },
+        "east": {
+          "uv": [
+            5.0,
+            8.0,
+            10.5,
+            9.0
+          ],
+          "texture": "#atlas"
+        },
+        "west": {
+          "uv": [
+            5.0,
+            8.0,
+            10.5,
+            9.0
+          ],
+          "texture": "#atlas"
+        }
+      }
+    },
+    {
+      "name": "cap",
+      "from": [
+        2,
+        13,
+        2
+      ],
+      "to": [
+        14,
+        15,
+        14
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            7.0,
+            0.0,
+            13.0,
+            6.0
+          ],
+          "texture": "#atlas"
+        },
+        "down": {
+          "uv": [
+            7.0,
+            0.0,
+            13.0,
+            6.0
+          ],
+          "texture": "#atlas"
+        },
+        "north": {
+          "uv": [
+            7.0,
+            6.0,
+            13.0,
+            7.0
+          ],
+          "texture": "#atlas"
+        },
+        "south": {
+          "uv": [
+            7.0,
+            6.0,
+            13.0,
+            7.0
+          ],
+          "texture": "#atlas"
+        },
+        "east": {
+          "uv": [
+            7.0,
+            6.0,
+            13.0,
+            7.0
+          ],
+          "texture": "#atlas"
+        },
+        "west": {
+          "uv": [
+            7.0,
+            6.0,
+            13.0,
+            7.0
+          ],
+          "texture": "#atlas"
+        }
+      }
+    },
+    {
+      "name": "collar_north",
+      "from": [
+        4,
+        15,
+        4
+      ],
+      "to": [
+        12,
+        16,
+        5
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            12.0,
+            7.0,
+            16.0,
+            7.5
+          ],
+          "texture": "#atlas"
+        },
+        "north": {
+          "uv": [
+            5.0,
+            9.0,
+            9.0,
+            9.5
+          ],
+          "texture": "#atlas"
+        },
+        "south": {
+          "uv": [
+            5.0,
+            9.0,
+            9.0,
+            9.5
+          ],
+          "texture": "#atlas"
+        },
+        "east": {
+          "uv": [
+            5.0,
+            9.0,
+            9.0,
+            9.5
+          ],
+          "texture": "#atlas"
+        },
+        "west": {
+          "uv": [
+            5.0,
+            9.0,
+            9.0,
+            9.5
+          ],
+          "texture": "#atlas"
+        }
+      }
+    },
+    {
+      "name": "collar_south",
+      "from": [
+        4,
+        15,
+        11
+      ],
+      "to": [
+        12,
+        16,
+        12
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            12.0,
+            10.5,
+            16.0,
+            11.0
+          ],
+          "texture": "#atlas"
+        },
+        "north": {
+          "uv": [
+            5.0,
+            9.0,
+            9.0,
+            9.5
+          ],
+          "texture": "#atlas"
+        },
+        "south": {
+          "uv": [
+            5.0,
+            9.0,
+            9.0,
+            9.5
+          ],
+          "texture": "#atlas"
+        },
+        "east": {
+          "uv": [
+            5.0,
+            9.0,
+            9.0,
+            9.5
+          ],
+          "texture": "#atlas"
+        },
+        "west": {
+          "uv": [
+            5.0,
+            9.0,
+            9.0,
+            9.5
+          ],
+          "texture": "#atlas"
+        }
+      }
+    },
+    {
+      "name": "collar_west",
+      "from": [
+        4,
+        15,
+        5
+      ],
+      "to": [
+        5,
+        16,
+        11
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            12.0,
+            7.5,
+            12.5,
+            10.5
+          ],
+          "texture": "#atlas"
+        },
+        "north": {
+          "uv": [
+            5.0,
+            9.0,
+            8.0,
+            9.5
+          ],
+          "texture": "#atlas"
+        },
+        "south": {
+          "uv": [
+            5.0,
+            9.0,
+            8.0,
+            9.5
+          ],
+          "texture": "#atlas"
+        },
+        "east": {
+          "uv": [
+            5.0,
+            9.0,
+            8.0,
+            9.5
+          ],
+          "texture": "#atlas"
+        },
+        "west": {
+          "uv": [
+            5.0,
+            9.0,
+            8.0,
+            9.5
+          ],
+          "texture": "#atlas"
+        }
+      }
+    },
+    {
+      "name": "collar_east",
+      "from": [
+        11,
+        15,
+        5
+      ],
+      "to": [
+        12,
+        16,
+        11
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            15.5,
+            7.5,
+            16.0,
+            10.5
+          ],
+          "texture": "#atlas"
+        },
+        "north": {
+          "uv": [
+            5.0,
+            9.0,
+            8.0,
+            9.5
+          ],
+          "texture": "#atlas"
+        },
+        "south": {
+          "uv": [
+            5.0,
+            9.0,
+            8.0,
+            9.5
+          ],
+          "texture": "#atlas"
+        },
+        "east": {
+          "uv": [
+            5.0,
+            9.0,
+            8.0,
+            9.5
+          ],
+          "texture": "#atlas"
+        },
+        "west": {
+          "uv": [
+            5.0,
+            9.0,
+            8.0,
+            9.5
+          ],
+          "texture": "#atlas"
+        }
+      }
+    },
+    {
+      "name": "terminal_box",
+      "from": [
+        5,
+        4,
+        1.5
+      ],
+      "to": [
+        11,
+        9,
+        3
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5.0,
+            9.5,
+            8.0,
+            12.0
+          ],
+          "texture": "#atlas"
+        },
+        "east": {
+          "uv": [
+            8.0,
+            9.5,
+            8.75,
+            12.0
+          ],
+          "texture": "#atlas"
+        },
+        "west": {
+          "uv": [
+            8.0,
+            9.5,
+            8.75,
+            12.0
+          ],
+          "texture": "#atlas"
+        },
+        "up": {
+          "uv": [
+            9.0,
+            9.5,
+            12.0,
+            10.25
+          ],
+          "texture": "#atlas"
+        },
+        "down": {
+          "uv": [
+            9.0,
+            9.5,
+            12.0,
+            10.25
+          ],
+          "texture": "#atlas"
+        }
+      }
+    },
+    {
+      "name": "shaft",
+      "from": [
+        6,
+        8,
+        6
+      ],
+      "to": [
+        10,
+        16,
+        10
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            6,
+            0,
+            10,
+            8
+          ],
+          "texture": "#axis"
+        },
+        "south": {
+          "uv": [
+            6,
+            0,
+            10,
+            8
+          ],
+          "texture": "#axis"
+        },
+        "east": {
+          "uv": [
+            6,
+            0,
+            10,
+            8
+          ],
+          "texture": "#axis"
+        },
+        "west": {
+          "uv": [
+            6,
+            0,
+            10,
+            8
+          ],
+          "texture": "#axis"
+        },
+        "up": {
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ],
+          "texture": "#axis_top"
+        }
+      }
+    }
+  ]
+}

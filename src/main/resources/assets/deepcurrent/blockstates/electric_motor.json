@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=up": {
+      "model": "deepcurrent:block/electric_motor"
+    },
+    "facing=down": {
+      "model": "deepcurrent:block/electric_motor",
+      "x": 180
+    },
+    "facing=north": {
+      "model": "deepcurrent:block/electric_motor",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "deepcurrent:block/electric_motor",
+      "x": 90,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "deepcurrent:block/electric_motor",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east": {
+      "model": "deepcurrent:block/electric_motor",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

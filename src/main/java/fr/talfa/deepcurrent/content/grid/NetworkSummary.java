@@ -51,7 +51,8 @@ public record NetworkSummary(int nodes, double cableLength, double offered, doub
                 .withStyle(ChatFormatting.GRAY));
     }
 
-    static String number(double value) {
+    /** Power or percentage as shown to players: one decimal below 100, none above. */
+    public static String number(double value) {
         return String.format(Locale.ROOT, value >= 100 ? "%.0f" : "%.1f", value);
     }
 

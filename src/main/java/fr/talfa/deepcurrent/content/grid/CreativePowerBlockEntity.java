@@ -2,6 +2,8 @@ package fr.talfa.deepcurrent.content.grid;
 
 import java.util.List;
 
+import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.CenteredSideValueBoxTransform;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
@@ -16,13 +18,14 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 /** Creative source or load with a power set in kW through Create's value panel. */
-public class CreativePowerBlockEntity extends GridBlockEntity {
+public class CreativePowerBlockEntity extends SmartBlockEntity implements GridParticipant, IHaveGoggleInformation {
     /** Create's value panel draws one cell per value: the setting moves in steps to keep it short. */
     public static final int KW_PER_STEP = 8;
     public static final int MAX_KW = 1024;
     private static final int DEFAULT_KW = 64;
 
     private ScrollValueBehaviour power;
+    private GridNodeBehaviour node;
     /** Power actually injected (source) or received (load), synced for the goggles. */
     private double actualKw;
     /** Fraction of the demand delivered, for a load. */
@@ -47,14 +50,11 @@ public class CreativePowerBlockEntity extends GridBlockEntity {
                 new CenteredSideValueBoxTransform((state, side) -> side.getAxis() != Direction.Axis.Y))
                 .between(0, MAX_KW / KW_PER_STEP)
                 .withFormatter(value -> value * KW_PER_STEP + " kW")
-                .withCallback(value -> {
-                    LevelGrid grid = grid();
-                    if (grid != null) {
-                        pushValues(grid);
-                    }
-                });
+                .withCallback(value -> node.push());
         power.value = DEFAULT_KW / KW_PER_STEP;
         behaviours.add(power);
+        node = new GridNodeBehaviour(this);
+        behaviours.add(node);
     }
 
     public int settingKw() {
@@ -67,12 +67,7 @@ public class CreativePowerBlockEntity extends GridBlockEntity {
     }
 
     @Override
-    protected void bondNeighbours(LevelGrid grid) {
-        GridBlocks.bondConnectorsAround(level, worldPosition, grid);
-    }
-
-    @Override
-    protected void pushValues(LevelGrid grid) {
+    public void pushValues(LevelGrid grid) {
         if (isSource()) {
             grid.graph().setOffer(worldPosition.asLong(), settingKw());
         } else {
@@ -81,7 +76,7 @@ public class CreativePowerBlockEntity extends GridBlockEntity {
     }
 
     @Override
-    protected void clearValues(LevelGrid grid) {
+    public void clearValues(LevelGrid grid) {
         if (isSource()) {
             grid.graph().setOffer(worldPosition.asLong(), 0);
         } else {
@@ -90,7 +85,7 @@ public class CreativePowerBlockEntity extends GridBlockEntity {
     }
 
     @Override
-    protected boolean pullValues(LevelGrid grid) {
+    public boolean pullValues(LevelGrid grid) {
         GridSolution solution = grid.solution(worldPosition);
         double flow = Math.abs(solution.flowKw(worldPosition.asLong()));
         double served = solution.satisfaction(worldPosition.asLong());
@@ -124,7 +119,7 @@ public class CreativePowerBlockEntity extends GridBlockEntity {
     }
 
     @Override
-    protected void writeData(CompoundTag tag, boolean clientPacket) {
+    public void writeGridData(CompoundTag tag, boolean clientPacket) {
         if (clientPacket) {
             tag.putDouble("ActualKw", actualKw);
             tag.putDouble("Satisfaction", satisfaction);
@@ -132,7 +127,7 @@ public class CreativePowerBlockEntity extends GridBlockEntity {
     }
 
     @Override
-    protected void readData(CompoundTag tag, boolean clientPacket) {
+    public void readGridData(CompoundTag tag, boolean clientPacket) {
         if (clientPacket) {
             actualKw = tag.getDouble("ActualKw");
             satisfaction = tag.getDouble("Satisfaction");

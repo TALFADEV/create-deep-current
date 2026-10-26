@@ -1,12 +1,12 @@
 {
   "parent": "block/block",
   "textures": {
-    "casing": "create:block/creative_casing",
-    "belt": "deepcurrent:block/creative_belt_source",
-    "particle": "create:block/creative_casing"
+    "atlas": "deepcurrent:block/creative_power_source",
+    "particle": "deepcurrent:block/creative_power_source"
   },
   "elements": [
     {
+      "name": "casing",
       "from": [
         0,
         0,
@@ -20,114 +20,180 @@
       "faces": {
         "north": {
           "uv": [
-            0,
-            0,
-            16,
-            16
+            0.0,
+            0.0,
+            8.0,
+            8.0
           ],
-          "texture": "#casing",
+          "texture": "#atlas",
           "cullface": "north"
         },
         "south": {
           "uv": [
-            0,
-            0,
-            16,
-            16
+            0.0,
+            0.0,
+            8.0,
+            8.0
           ],
-          "texture": "#casing",
+          "texture": "#atlas",
           "cullface": "south"
         },
         "east": {
           "uv": [
-            0,
-            0,
-            16,
-            16
+            0.0,
+            0.0,
+            8.0,
+            8.0
           ],
-          "texture": "#casing",
+          "texture": "#atlas",
           "cullface": "east"
         },
         "west": {
           "uv": [
-            0,
-            0,
-            16,
-            16
+            0.0,
+            0.0,
+            8.0,
+            8.0
           ],
-          "texture": "#casing",
+          "texture": "#atlas",
           "cullface": "west"
         },
         "up": {
           "uv": [
-            0,
-            0,
-            16,
-            16
+            8.0,
+            0.0,
+            16.0,
+            8.0
           ],
-          "texture": "#casing",
+          "texture": "#atlas",
           "cullface": "up"
         },
         "down": {
           "uv": [
-            0,
-            0,
-            16,
-            16
+            0.0,
+            8.0,
+            8.0,
+            16.0
           ],
-          "texture": "#casing",
+          "texture": "#atlas",
           "cullface": "down"
         }
       }
     },
     {
+      "name": "core_north",
       "from": [
-        -0.5,
-        7,
-        -0.5
+        5,
+        5,
+        -0.02
       ],
       "to": [
-        16.5,
-        9,
-        16.5
+        11,
+        11,
+        0
       ],
       "faces": {
         "north": {
           "uv": [
-            0,
-            0,
-            16,
-            2
+            8.0,
+            8.0,
+            11.0,
+            11.0
           ],
-          "texture": "#belt"
-        },
+          "texture": "#atlas",
+          "cullface": "north"
+        }
+      },
+      "neoforge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      }
+    },
+    {
+      "name": "core_south",
+      "from": [
+        5,
+        5,
+        16
+      ],
+      "to": [
+        11,
+        11,
+        16.02
+      ],
+      "faces": {
         "south": {
           "uv": [
-            0,
-            0,
-            16,
-            2
+            8.0,
+            8.0,
+            11.0,
+            11.0
           ],
-          "texture": "#belt"
-        },
-        "east": {
-          "uv": [
-            0,
-            0,
-            16,
-            2
-          ],
-          "texture": "#belt"
-        },
+          "texture": "#atlas",
+          "cullface": "south"
+        }
+      },
+      "neoforge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      }
+    },
+    {
+      "name": "core_west",
+      "from": [
+        -0.02,
+        5,
+        5
+      ],
+      "to": [
+        0,
+        11,
+        11
+      ],
+      "faces": {
         "west": {
           "uv": [
-            0,
-            0,
-            16,
-            2
+            8.0,
+            8.0,
+            11.0,
+            11.0
           ],
-          "texture": "#belt"
+          "texture": "#atlas",
+          "cullface": "west"
         }
+      },
+      "neoforge_data": {
+        "block_light": 15,
+        "sky_light": 15
+      }
+    },
+    {
+      "name": "core_east",
+      "from": [
+        16,
+        5,
+        5
+      ],
+      "to": [
+        16.02,
+        11,
+        11
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            8.0,
+            8.0,
+            11.0,
+            11.0
+          ],
+          "texture": "#atlas",
+          "cullface": "east"
+        }
+      },
+      "neoforge_data": {
+        "block_light": 15,
+        "sky_light": 15
       }
     }
   ]

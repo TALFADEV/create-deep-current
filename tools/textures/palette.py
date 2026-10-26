@@ -10,6 +10,7 @@ Each ramp goes from darkest to lightest. Never hard-code a colour in a generator
 from __future__ import annotations
 
 from palette_create import RAMPS as CREATE
+from palette_refs import RAMPS as REFS
 
 
 def rgb(hex_code: str) -> tuple[int, int, int, int]:
@@ -33,6 +34,12 @@ IRON = ramp(*CREATE["IRON"])
 RUBBER = ramp(*CREATE["RUBBER"])
 CREATIVE_FRAME = ramp(*CREATE["CREATIVE_FRAME"])
 CREATIVE_INNER = ramp(*CREATE["CREATIVE_INNER"])
+
+# --- Industrial iron (chosen direction, sampled from other Create add-ons) -------------------------
+# Dark riveted housings: Steam 'n' Rails' black locometal (#22222A) stretched into a full ramp.
+DARK_IRON = ramp("#141319", "#1C1B22", "#24242C", "#30303A", "#41414B", "#56565F")
+# Lighter structural iron: Crafts & Additions' alternator greys.
+HEAVY_IRON = ramp(*REFS["HEAVY_IRON"])
 
 # --- Our additions, muted to match ---------------------------------------------------------------
 # Verdigris patina on copper and brass.
@@ -58,6 +65,8 @@ RAMPS: dict[str, list[tuple[int, int, int, int]]] = {
     "dark_wood": DARK_WOOD,
     "iron": IRON,
     "rubber": RUBBER,
+    "dark_iron": DARK_IRON,
+    "heavy_iron": HEAVY_IRON,
     "creative_frame": CREATIVE_FRAME,
     "creative_inner": CREATIVE_INNER,
     "verdigris": VERDIGRIS,

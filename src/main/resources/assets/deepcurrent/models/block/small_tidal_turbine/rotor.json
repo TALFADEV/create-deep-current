@@ -1,0 +1,407 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "atlas": "deepcurrent:block/small_tidal_turbine",
+    "axis": "create:block/axis",
+    "axis_top": "create:block/axis_top",
+    "particle": "deepcurrent:block/small_tidal_turbine"
+  },
+  "elements": [
+    {
+      "name": "hub",
+      "from": [
+        6,
+        6,
+        1
+      ],
+      "to": [
+        10,
+        10,
+        4
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            8.0,
+            4.0,
+            10.0,
+            6.0
+          ],
+          "texture": "#atlas"
+        },
+        "east": {
+          "uv": [
+            0.0,
+            5.5,
+            2.0,
+            7.0
+          ],
+          "texture": "#atlas"
+        },
+        "west": {
+          "uv": [
+            0.0,
+            5.5,
+            2.0,
+            7.0
+          ],
+          "texture": "#atlas"
+        },
+        "up": {
+          "uv": [
+            0.0,
+            5.5,
+            2.0,
+            7.0
+          ],
+          "texture": "#atlas"
+        },
+        "down": {
+          "uv": [
+            0.0,
+            5.5,
+            2.0,
+            7.0
+          ],
+          "texture": "#atlas"
+        }
+      }
+    },
+    {
+      "name": "nose",
+      "from": [
+        7,
+        7,
+        0
+      ],
+      "to": [
+        9,
+        9,
+        1
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            10.0,
+            4.0,
+            11.0,
+            5.0
+          ],
+          "texture": "#atlas"
+        },
+        "east": {
+          "uv": [
+            11.0,
+            4.0,
+            12.0,
+            4.5
+          ],
+          "texture": "#atlas"
+        },
+        "west": {
+          "uv": [
+            11.0,
+            4.0,
+            12.0,
+            4.5
+          ],
+          "texture": "#atlas"
+        },
+        "up": {
+          "uv": [
+            11.0,
+            4.0,
+            12.0,
+            4.5
+          ],
+          "texture": "#atlas"
+        },
+        "down": {
+          "uv": [
+            11.0,
+            4.0,
+            12.0,
+            4.5
+          ],
+          "texture": "#atlas"
+        }
+      }
+    },
+    {
+      "name": "blade_top",
+      "from": [
+        6.5,
+        10,
+        2
+      ],
+      "to": [
+        9.5,
+        15.5,
+        3
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            7.0,
+            1.5,
+            9.75
+          ],
+          "texture": "#atlas"
+        },
+        "south": {
+          "uv": [
+            0.0,
+            7.0,
+            1.5,
+            9.75
+          ],
+          "texture": "#atlas"
+        },
+        "east": {
+          "uv": [
+            1.0,
+            7.0,
+            1.5,
+            9.75
+          ],
+          "texture": "#atlas"
+        },
+        "west": {
+          "uv": [
+            1.0,
+            7.0,
+            1.5,
+            9.75
+          ],
+          "texture": "#atlas"
+        },
+        "up": {
+          "uv": [
+            0.0,
+            7.0,
+            1.5,
+            7.5
+          ],
+          "texture": "#atlas"
+        }
+      },
+      "rotation": {
+        "angle": 22.5,
+        "axis": "y",
+        "origin": [
+          8,
+          8,
+          2.5
+        ]
+      }
+    },
+    {
+      "name": "blade_bottom",
+      "from": [
+        6.5,
+        0.5,
+        2
+      ],
+      "to": [
+        9.5,
+        6,
+        3
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0.0,
+            9.75,
+            1.5,
+            7.0
+          ],
+          "texture": "#atlas"
+        },
+        "south": {
+          "uv": [
+            0.0,
+            9.75,
+            1.5,
+            7.0
+          ],
+          "texture": "#atlas"
+        },
+        "east": {
+          "uv": [
+            1.0,
+            9.75,
+            1.5,
+            7.0
+          ],
+          "texture": "#atlas"
+        },
+        "west": {
+          "uv": [
+            1.0,
+            9.75,
+            1.5,
+            7.0
+          ],
+          "texture": "#atlas"
+        },
+        "down": {
+          "uv": [
+            0.0,
+            7.0,
+            1.5,
+            7.5
+          ],
+          "texture": "#atlas"
+        }
+      },
+      "rotation": {
+        "angle": -22.5,
+        "axis": "y",
+        "origin": [
+          8,
+          8,
+          2.5
+        ]
+      }
+    },
+    {
+      "name": "blade_east",
+      "from": [
+        10,
+        6.5,
+        2
+      ],
+      "to": [
+        15.5,
+        9.5,
+        3
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4.5,
+            7.0,
+            1.75,
+            8.5
+          ],
+          "texture": "#atlas"
+        },
+        "south": {
+          "uv": [
+            1.75,
+            7.0,
+            4.5,
+            8.5
+          ],
+          "texture": "#atlas"
+        },
+        "up": {
+          "uv": [
+            1.75,
+            8.5,
+            4.5,
+            9.0
+          ],
+          "texture": "#atlas"
+        },
+        "down": {
+          "uv": [
+            1.75,
+            8.5,
+            4.5,
+            9.0
+          ],
+          "texture": "#atlas"
+        },
+        "east": {
+          "uv": [
+            0.0,
+            7.0,
+            0.5,
+            8.5
+          ],
+          "texture": "#atlas"
+        }
+      },
+      "rotation": {
+        "angle": 22.5,
+        "axis": "x",
+        "origin": [
+          8,
+          8,
+          2.5
+        ]
+      }
+    },
+    {
+      "name": "blade_west",
+      "from": [
+        0.5,
+        6.5,
+        2
+      ],
+      "to": [
+        6,
+        9.5,
+        3
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            1.75,
+            7.0,
+            4.5,
+            8.5
+          ],
+          "texture": "#atlas"
+        },
+        "south": {
+          "uv": [
+            4.5,
+            7.0,
+            1.75,
+            8.5
+          ],
+          "texture": "#atlas"
+        },
+        "up": {
+          "uv": [
+            4.5,
+            8.5,
+            1.75,
+            9.0
+          ],
+          "texture": "#atlas"
+        },
+        "down": {
+          "uv": [
+            4.5,
+            8.5,
+            1.75,
+            9.0
+          ],
+          "texture": "#atlas"
+        },
+        "west": {
+          "uv": [
+            0.0,
+            7.0,
+            0.5,
+            8.5
+          ],
+          "texture": "#atlas"
+        }
+      },
+      "rotation": {
+        "angle": -22.5,
+        "axis": "x",
+        "origin": [
+          8,
+          8,
+          2.5
+        ]
+      }
+    }
+  ]
+}

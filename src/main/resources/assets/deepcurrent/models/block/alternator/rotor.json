@@ -1,0 +1,132 @@
+{
+  "parent": "block/block",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "atlas": "deepcurrent:block/alternator",
+    "axis": "create:block/axis",
+    "axis_top": "create:block/axis_top",
+    "particle": "deepcurrent:block/alternator"
+  },
+  "elements": [
+    {
+      "name": "rotor",
+      "from": [
+        4,
+        4,
+        4
+      ],
+      "to": [
+        12,
+        12,
+        12
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            11.0,
+            8.0,
+            15.0,
+            12.0
+          ],
+          "texture": "#atlas"
+        },
+        "down": {
+          "uv": [
+            11.0,
+            8.0,
+            15.0,
+            12.0
+          ],
+          "texture": "#atlas"
+        },
+        "east": {
+          "uv": [
+            7.0,
+            8.0,
+            11.0,
+            12.0
+          ],
+          "texture": "#atlas"
+        },
+        "west": {
+          "uv": [
+            7.0,
+            8.0,
+            11.0,
+            12.0
+          ],
+          "texture": "#atlas"
+        }
+      }
+    },
+    {
+      "name": "shaft",
+      "from": [
+        6,
+        6,
+        0
+      ],
+      "to": [
+        10,
+        10,
+        16
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            6,
+            0,
+            10,
+            16
+          ],
+          "texture": "#axis"
+        },
+        "down": {
+          "uv": [
+            6,
+            0,
+            10,
+            16
+          ],
+          "texture": "#axis"
+        },
+        "east": {
+          "uv": [
+            6,
+            0,
+            10,
+            16
+          ],
+          "texture": "#axis"
+        },
+        "west": {
+          "uv": [
+            6,
+            0,
+            10,
+            16
+          ],
+          "texture": "#axis"
+        },
+        "north": {
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ],
+          "texture": "#axis_top"
+        },
+        "south": {
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ],
+          "texture": "#axis_top"
+        }
+      }
+    }
+  ]
+}

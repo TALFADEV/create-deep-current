@@ -83,6 +83,10 @@ tasks.processResources {
     )
     inputs.properties(metadata)
     filesMatching(listOf("META-INF/mods.toml", "pack.mcmeta")) { expand(metadata) }
+    // Model extras (emissive faces...) are written for NeoForge; Forge 1.20.1 names the same object forge_data.
+    filesMatching("assets/*/models/**/*.json") {
+        filter { line -> line.replace("\"neoforge_data\"", "\"forge_data\"") }
+    }
     exclude("META-INF/neoforge.mods.toml")
 }
 

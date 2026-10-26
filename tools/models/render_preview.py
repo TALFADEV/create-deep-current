@@ -16,6 +16,7 @@ import zipfile
 from functools import lru_cache
 from pathlib import Path
 
+import numpy as np
 from PIL import Image, ImageDraw
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "textures"))
@@ -78,15 +79,39 @@ class Scene:
             x0, y0, z0 = (c / 16 for c in e["from"])
             x1, y1, z1 = (c / 16 for c in e["to"])
             bx, by, bz = at
+            turn = self._rotation(e.get("rotation"), at)
             for side in ("up", "south", "east"):
                 face = e["faces"].get(side)
                 if face is None:
                     continue
                 img = textures[face["texture"][1:]]
-                self._face(side, img, face["uv"], (bx + x0, by + y0, bz + z0), (bx + x1, by + y1, bz + z1))
+                self._face(side, img, face["uv"], (bx + x0, by + y0, bz + z0), (bx + x1, by + y1, bz + z1), turn)
 
-    def _face(self, side, img, uv, low, high):
-        u0, v0, u1, v1 = uv
+    @staticmethod
+    def _rotation(rotation, at):
+        """Element rotation as Minecraft applies it (right-handed, about the positive axis), or None."""
+        if not rotation or not rotation.get("angle"):
+            return None
+        a = math.radians(rotation["angle"])
+        ca, sa = math.cos(a), math.sin(a)
+        ox, oy, oz = (o / 16 + b for o, b in zip(rotation["origin"], at))
+        axis = rotation["axis"]
+
+        def turn(p):
+            x, y, z = p[0] - ox, p[1] - oy, p[2] - oz
+            if axis == "x":
+                y, z = y * ca - z * sa, y * sa + z * ca
+            elif axis == "y":
+                x, z = x * ca + z * sa, -x * sa + z * ca
+            else:
+                x, y = x * ca - y * sa, x * sa + y * ca
+            return x + ox, y + oy, z + oz
+        return turn
+
+    def _face(self, side, img, uv, low, high, turn=None):
+        # UVs run 0..16 whatever the texture size: an atlas of 32 px has 2 pixels per UV unit.
+        k = img.width / 16
+        u0, v0, u1, v1 = (c * k for c in uv)
         x0, y0, z0 = low
         x1, y1, z1 = high
         columns = max(1, round(abs(u1 - u0)))
@@ -95,7 +120,7 @@ class Scene:
             for j in range(rows):
                 u = int(min(u0, u1) + i)
                 v = int(min(v0, v1) + j)
-                color = img.getpixel((min(u, 15), min(v, 15)))
+                color = img.getpixel((min(u, img.width - 1), min(v, img.height - 1)))
                 if color[3] == 0:
                     continue
                 s0, s1 = i / columns, (i + 1) / columns
@@ -109,9 +134,12 @@ class Scene:
                 else:  # east: u runs from south (z1) to north (z0)
                     corners = [(x1, y1 - (y1 - y0) * t, z1 - (z1 - z0) * s)
                                for s, t in ((s0, t0), (s1, t0), (s1, t1), (s0, t1))]
+                if turn is not None:
+                    corners = [turn(c) for c in corners]
                 depth = sum(c[0] + c[1] + c[2] for c in corners) / 4
-                shaded = tuple(int(c * SHADE[side]) for c in color[:3]) + (255,)
-                self.polygons.append((depth, [self.project(*c) for c in corners], shaded))
+                shaded = tuple(int(c * SHADE[side]) for c in color[:3]) + (color[3],)
+                self.polygons.append((depth, [self.project(*c) for c in corners], shaded,
+                                      [c[0] + c[1] + c[2] for c in corners]))
 
     def add_cable(self, start, end, sag_per_block=0.06, segments=32):
         length = math.dist(start, end)
@@ -125,16 +153,83 @@ class Scene:
             points.append((x, y, z))
         for a, b in zip(points, points[1:]):
             depth = sum(a) + 0.05
-            self.polygons.append((depth, ("line", self.project(*a), self.project(*b)), (26, 26, 30, 255)))
+            self.polygons.append((depth, ("line", self.project(*a), self.project(*b)), (26, 26, 30, 255), None))
+
+    @staticmethod
+    def _raster(shape, corner_depths, depth, width, height):
+        """Mask of the pixels a quad covers within its bounding box, and its depth there."""
+        xs = [p[0] for p in shape]
+        ys = [p[1] for p in shape]
+        bx0, by0 = max(0, int(math.floor(min(xs)))), max(0, int(math.floor(min(ys))))
+        bx1, by1 = min(width, int(math.ceil(max(xs))) + 1), min(height, int(math.ceil(max(ys))) + 1)
+        if bx1 <= bx0 or by1 <= by0:
+            return None, (bx0, by0, bx1, by1), None
+        mask = Image.new("1", (bx1 - bx0, by1 - by0), 0)
+        ImageDraw.Draw(mask).polygon([(x - bx0, y - by0) for x, y in shape], fill=1)
+        (x_a, y_a), (x_b, y_b), (x_c, y_c) = shape[0], shape[1], shape[3]
+        try:
+            a, b, c = np.linalg.solve(np.array([[x_a, y_a, 1], [x_b, y_b, 1], [x_c, y_c, 1]]),
+                                      [corner_depths[0], corner_depths[1], corner_depths[3]])
+        except np.linalg.LinAlgError:
+            a, b, c = 0, 0, depth
+        gx, gy = np.meshgrid(np.arange(bx0, bx1) + 0.5, np.arange(by0, by1) + 0.5)
+        return np.array(mask, dtype=bool), (bx0, by0, bx1, by1), a * gx + b * gy + c
 
     def render(self) -> Image.Image:
-        width = max(2, int(self.scale * 0.09))
-        for depth, shape, color in sorted(self.polygons, key=lambda p: p[0]):
+        """Rasterises every texel quad with a depth buffer (nearest to the viewer = largest x + y + z), so
+        interleaved parts hide each other correctly; cables are drawn on top."""
+        width, height = self.image.size
+        zbuf = np.full((height, width), -np.inf)
+        pixels = np.array(self.image)
+        lines = []
+        translucent = []
+        for depth, shape, color, corner_depths in self.polygons:
             if shape[0] == "line":
-                self.draw.line([shape[1], shape[2]], fill=color, width=width)
-                self.draw.line([shape[1], shape[2]], fill=(194, 122, 0, 255), width=1)
-            else:
-                self.draw.polygon(shape, fill=color)
+                lines.append((shape, color))
+                continue
+            if color[3] < 255:
+                translucent.append((depth, shape, color, corner_depths))
+                continue
+            xs = [p[0] for p in shape]
+            ys = [p[1] for p in shape]
+            bx0, by0 = max(0, int(math.floor(min(xs)))), max(0, int(math.floor(min(ys))))
+            bx1, by1 = min(width, int(math.ceil(max(xs))) + 1), min(height, int(math.ceil(max(ys))) + 1)
+            if bx1 <= bx0 or by1 <= by0:
+                continue
+            mask = Image.new("1", (bx1 - bx0, by1 - by0), 0)
+            ImageDraw.Draw(mask).polygon([(x - bx0, y - by0) for x, y in shape], fill=1)
+            inside = np.array(mask, dtype=bool)
+            # Depth is affine on a plane under this orthographic projection: fit it on three corners.
+            (x_a, y_a), (x_b, y_b), (x_c, y_c) = shape[0], shape[1], shape[3]
+            matrix = np.array([[x_a, y_a, 1], [x_b, y_b, 1], [x_c, y_c, 1]])
+            try:
+                a, b, c = np.linalg.solve(matrix, [corner_depths[0], corner_depths[1], corner_depths[3]])
+            except np.linalg.LinAlgError:
+                a, b, c = 0, 0, depth
+            gx, gy = np.meshgrid(np.arange(bx0, bx1) + 0.5, np.arange(by0, by1) + 0.5)
+            d = a * gx + b * gy + c
+            region = zbuf[by0:by1, bx0:bx1]
+            closer = inside & (d > region - 1e-4)
+            region[closer] = d[closer]
+            pixels[by0:by1, bx0:bx1][closer] = color
+        # Glass and other translucent texels: blended far to near over what is behind them, without hiding it.
+        for depth, shape, color, corner_depths in sorted(translucent, key=lambda p: p[0]):
+            mask, (bx0, by0, bx1, by1), d = self._raster(shape, corner_depths, depth, width, height)
+            if mask is None:
+                continue
+            front = mask & (d > zbuf[by0:by1, bx0:bx1] - 1e-4)
+            alpha = color[3] / 255
+            target = pixels[by0:by1, bx0:bx1]
+            for channel in range(3):
+                layer = target[..., channel].astype(float)
+                layer[front] = layer[front] * (1 - alpha) + color[channel] * alpha
+                target[..., channel] = layer.astype(np.uint8)
+        self.image = Image.fromarray(pixels)
+        self.draw = ImageDraw.Draw(self.image)
+        line_width = max(2, int(self.scale * 0.09))
+        for shape, color in lines:
+            self.draw.line([shape[1], shape[2]], fill=color, width=line_width)
+            self.draw.line([shape[1], shape[2]], fill=(194, 122, 0, 255), width=1)
         return self.image
 
 

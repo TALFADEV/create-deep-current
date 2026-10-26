@@ -42,11 +42,11 @@ public class ConnectorBlock extends Block implements IBE<ConnectorBlockEntity>, 
 
     static {
         for (Direction facing : Direction.values()) {
-            // Andesite foot, insulator with its sheds, copper lug (see tools/textures/grid_textures.py).
+            // Wall plate and collar, insulator discs, clamp and lug (see tools/textures/network_art.py).
             SHAPES.put(facing, Shapes.or(
-                    box(facing, 4, 0, 4, 12, 2, 12),
-                    box(facing, 5, 2, 5, 11, 10, 11),
-                    box(facing, 6.5, 10, 6.5, 9.5, 12, 9.5)));
+                    box(facing, 4, 0, 4, 12, 3, 12),
+                    box(facing, 4.5, 3, 4.5, 11.5, 10, 11.5),
+                    box(facing, 6, 10, 6, 10, 12, 10)));
         }
     }
 

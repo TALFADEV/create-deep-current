@@ -14,7 +14,16 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw
 
+import alternator_art
+import battery_art
+import creative_art
+import turbine_art
+import wear_art
+from dc import materials as dc_materials
 import grid_textures
+import machine_textures
+import motor_art
+import network_art
 import palette
 
 PREVIEW = Path(__file__).resolve().parent / "preview"
@@ -38,7 +47,10 @@ def palette_sheet() -> None:
     sheet.save(PREVIEW / "palette.png")
 
 
-GENERATORS = [palette_sheet, *grid_textures.GENERATORS]
+GENERATORS = [palette_sheet, *creative_art.GENERATORS, *machine_textures.GENERATORS,
+              *alternator_art.GENERATORS, *motor_art.GENERATORS, *network_art.GENERATORS, *battery_art.GENERATORS,
+              *turbine_art.GENERATORS, *wear_art.GENERATORS,
+              *dc_materials.GENERATORS]
 
 
 def main() -> None:

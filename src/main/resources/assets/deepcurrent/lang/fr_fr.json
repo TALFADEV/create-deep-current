@@ -97,5 +97,15 @@
   "deepcurrent.configuration.criticalEfficiency": "Rendement en état critique",
   "deepcurrent.configuration.machinesBreak": "Les machines cassent à 0 %",
   "deepcurrent.configuration.performance": "Performance",
-  "deepcurrent.configuration.particles": "Particules"
+  "deepcurrent.configuration.particles": "Particules",
+  "block.deepcurrent.alternator": "Alternateur",
+  "block.deepcurrent.electric_motor": "Moteur électrique",
+  "deepcurrent.alternator.title": "Alternateur",
+  "deepcurrent.alternator.output": "Fournit %s kW (propose %s kW)",
+  "deepcurrent.electric_motor.title": "Moteur électrique",
+  "deepcurrent.electric_motor.input": "Reçoit %s kW (demande %s kW)",
+  "deepcurrent.electric_motor.short": "Alimenté à %s %% : capacité réduite",
+  "deepcurrent.electric_motor.speed": "Vitesse",
+  "deepcurrent.configuration.alternatorStressImpact": "Contrainte de l'alternateur par tr/min",
+  "deepcurrent.configuration.motorStressCapacity": "Capacité du moteur électrique par tr/min"
 }

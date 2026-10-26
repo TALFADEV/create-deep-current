@@ -97,5 +97,15 @@
   "deepcurrent.configuration.criticalEfficiency": "Output when critical",
   "deepcurrent.configuration.machinesBreak": "Machines break at 0 %",
   "deepcurrent.configuration.performance": "Performance",
-  "deepcurrent.configuration.particles": "Particles"
+  "deepcurrent.configuration.particles": "Particles",
+  "block.deepcurrent.alternator": "Alternator",
+  "block.deepcurrent.electric_motor": "Electric Motor",
+  "deepcurrent.alternator.title": "Alternator",
+  "deepcurrent.alternator.output": "Supplying %s kW (offers %s kW)",
+  "deepcurrent.electric_motor.title": "Electric motor",
+  "deepcurrent.electric_motor.input": "Receiving %s kW (asks %s kW)",
+  "deepcurrent.electric_motor.short": "Supplied at %s %%: capacity reduced",
+  "deepcurrent.electric_motor.speed": "Speed",
+  "deepcurrent.configuration.alternatorStressImpact": "Alternator stress per RPM",
+  "deepcurrent.configuration.motorStressCapacity": "Electric motor capacity per RPM"
 }

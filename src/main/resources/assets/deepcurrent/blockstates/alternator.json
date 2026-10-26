@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "active=false,axis=z": {
+      "model": "deepcurrent:block/alternator"
+    },
+    "active=true,axis=z": {
+      "model": "deepcurrent:block/alternator_active"
+    },
+    "active=false,axis=x": {
+      "model": "deepcurrent:block/alternator",
+      "y": 90
+    },
+    "active=true,axis=x": {
+      "model": "deepcurrent:block/alternator_active",
+      "y": 90
+    }
+  }
+}

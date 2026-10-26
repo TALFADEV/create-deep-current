@@ -18,6 +18,7 @@ public final class DCClient {
     }
 
     public static void init(IEventBus modBus) {
+        DCPartialModels.init();
         //? if neoforge {
         NeoForge.EVENT_BUS.addListener((ClientTickEvent.Post event) -> CablePreview.tick());
         NeoForge.EVENT_BUS.addListener((RenderLevelStageEvent event) -> {

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "deepcurrent:block/small_tidal_turbine"
+    },
+    "facing=east": {
+      "model": "deepcurrent:block/small_tidal_turbine",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "deepcurrent:block/small_tidal_turbine",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "deepcurrent:block/small_tidal_turbine",
+      "y": 270
+    }
+  }
+}
